@@ -10,18 +10,19 @@ export async function middleware(request: NextRequest) {
         });
 
         if (!session) {
-            return NextResponse.redirect(new URL("/login", request.url));
+            return NextResponse.redirect(new URL("/auth/login", request.url));
         }
 
         return NextResponse.next();
     } catch (_error) {
         // If session validation fails, redirect to login
-        return NextResponse.redirect(new URL("/login", request.url));
+        return NextResponse.redirect(new URL("/auth/login", request.url));
     }
 }
 
 export const config = {
     matcher: [
         "/dashboard/:path*", // Protects /dashboard and all sub-routes
+        "/admin/:path*", // Protects /admin and all sub-routes
     ],
 };

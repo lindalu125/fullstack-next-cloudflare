@@ -1,16 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    /* config options here */
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "**",
+            },
+        ],
+    },
 };
 
-// Only run during `next dev`, not during `next build`
-if (process.argv.includes("dev")) {
-    import("@opennextjs/cloudflare").then(
-        ({ initOpenNextCloudflareForDev }) => {
-            initOpenNextCloudflareForDev();
-        },
-    );
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
+// Only run during `next dev`
+if (process.env.NODE_ENV === "development") {
+    initOpenNextCloudflareForDev();
 }
 
 export default nextConfig;

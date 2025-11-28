@@ -4,7 +4,7 @@ import { z } from "zod";
 import { VALIDATION_MESSAGES } from "@/constants/validation.constant";
 import { user } from "@/modules/auth/schemas/auth.schema";
 
-export const categories = sqliteTable("categories", {
+export const categories = sqliteTable("todo_categories", {
     id: integer("id").primaryKey({ autoIncrement: true }),
     name: text("name").notNull(),
     color: text("color").default("#6366f1"),

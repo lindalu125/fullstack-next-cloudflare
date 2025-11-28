@@ -1,0 +1,154 @@
+import Link from "next/link";
+import { Github, Twitter, Mail } from "lucide-react";
+
+/**
+ * Footer Component
+ * Global footer with links, social media, and copyright
+ */
+export function Footer() {
+    const currentYear = new Date().getFullYear();
+
+    const footerLinks = {
+        product: [
+            { name: "AI Tools", href: "/categories/ai-tools" },
+            { name: "Digital Tools", href: "/categories/digital-tools" },
+            { name: "Submit Tool", href: "/submit" },
+            { name: "Blog", href: "/blog" },
+        ],
+        resources: [
+            { name: "About", href: "/about" },
+            { name: "Contact", href: "/contact" },
+            { name: "Privacy Policy", href: "/privacy" },
+            { name: "Terms of Service", href: "/terms" },
+        ],
+    };
+
+    const socialLinks = [
+        {
+            name: "GitHub",
+            href: "https://github.com",
+            icon: Github,
+        },
+        {
+            name: "Twitter",
+            href: "https://twitter.com",
+            icon: Twitter,
+        },
+        {
+            name: "Email",
+            href: "mailto:contact@toolsail.top",
+            icon: Mail,
+        },
+    ];
+
+    return (
+        <footer className="border-t border-light-border dark:border-dark-border bg-light-bg-secondary dark:bg-dark-bg-secondary">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    {/* Brand */}
+                    <div className="space-y-4">
+                        <Link
+                            href="/"
+                            className="flex items-center space-x-2 font-bold text-xl"
+                        >
+                            <span className="text-light-text-primary dark:text-dark-text-primary">
+                                🧭
+                            </span>
+                            <span className="text-light-text-primary dark:text-dark-text-primary">
+                                Toolsail
+                            </span>
+                        </Link>
+                        <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                            Discover the best AI and digital tools to boost your
+                            productivity.
+                        </p>
+                        {/* Social Links */}
+                        <div className="flex space-x-4">
+                            {socialLinks.map((social) => (
+                                <a
+                                    key={social.name}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-light-text-secondary dark:text-dark-text-secondary hover:text-light-text-primary dark:hover:text-dark-text-primary transition-colors"
+                                    aria-label={social.name}
+                                >
+                                    <social.icon className="w-5 h-5" />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Product Links */}
+                    <div>
+                        <h3 className="font-semibold text-light-text-primary dark:text-dark-text-primary mb-4">
+                            Product
+                        </h3>
+                        <ul className="space-y-2">
+                            {footerLinks.product.map((link) => (
+                                <li key={link.name}>
+                                    <Link
+                                        href={link.href}
+                                        className="text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-light-text-primary dark:hover:text-dark-text-primary transition-colors"
+                                    >
+                                        {link.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Resources Links */}
+                    <div>
+                        <h3 className="font-semibold text-light-text-primary dark:text-dark-text-primary mb-4">
+                            Resources
+                        </h3>
+                        <ul className="space-y-2">
+                            {footerLinks.resources.map((link) => (
+                                <li key={link.name}>
+                                    <Link
+                                        href={link.href}
+                                        className="text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-light-text-primary dark:hover:text-dark-text-primary transition-colors"
+                                    >
+                                        {link.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Newsletter */}
+                    <div>
+                        <h3 className="font-semibold text-light-text-primary dark:text-dark-text-primary mb-4">
+                            Stay Updated
+                        </h3>
+                        <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary mb-4">
+                            Get the latest tools and updates delivered to your
+                            inbox.
+                        </p>
+                        <form className="flex gap-2">
+                            <input
+                                type="email"
+                                placeholder="Your email"
+                                className="flex-1 px-3 py-2 text-sm border rounded-md bg-light-bg-primary dark:bg-dark-bg-secondary border-light-border dark:border-dark-border focus:outline-none focus:ring-2 focus:ring-light-text-primary dark:focus:ring-dark-text-primary"
+                            />
+                            <button
+                                type="submit"
+                                className="px-4 py-2 text-sm font-semibold text-light-bg-primary dark:text-dark-bg-primary bg-light-text-primary dark:bg-dark-text-primary rounded-lg hover:opacity-90 transition-opacity"
+                            >
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                {/* Copyright */}
+                <div className="mt-12 pt-8 border-t border-light-border dark:border-dark-border">
+                    <p className="text-center text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                        © {currentYear} Toolsail. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    );
+}

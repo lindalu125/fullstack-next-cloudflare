@@ -8,12 +8,19 @@ export const user = sqliteTable("user", {
         .default(false)
         .notNull(),
     image: text("image"),
+
+    // Authorization - Added for Toolsail
+    role: text("role", { enum: ["user", "admin"] })
+        .notNull()
+        .default("user"),
+    adminRole: text("admin_role", { enum: ["admin", "editor", "moderator"] }), // null if role='user'
+
     createdAt: integer("created_at", { mode: "timestamp" })
         .defaultNow()
         .notNull(),
     updatedAt: integer("updated_at", { mode: "timestamp" })
         .defaultNow()
-        .$onUpdate(() => /* @__PURE__ */ new Date())
+        .$onUpdate(() => new Date())
         .notNull(),
 });
 
